@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<robot name="refrigerator">
+  <link name="refrigerator">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="refrigerator/base_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="refrigerator/base_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="50.000"/>
+      <inertia ixx="0.160" ixy="0" ixz="0" iyy="0.160" iyz="0" izz="0.160"/>
+    </inertial>
+  </link>
+  <link name="refrigerator_part1_base"/>
+  <link name="refrigerator_part1">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="refrigerator/part1_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="refrigerator/part1_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="3.000"/>
+      <inertia ixx="0.050" ixy="0" ixz="0" iyy="0.050" iyz="0" izz="0.050"/>
+    </inertial>
+  </link>
+  <joint name="refrigerator_part1_joint" type="revolute">
+    <origin xyz="0.58500000 0.22800000 0.29580000" rpy="0 0 0"/>
+    <parent link="refrigerator"/>
+    <child link="refrigerator_part1_base"/>
+    <axis xyz="0.52956143 0.05315254 0.84660469"/>
+    <limit lower="-0.005244" upper="2.5" effort="30" velocity="1.5"/>
+  </joint>
+  <joint name="refrigerator_part1_fix" type="fixed">
+    <origin xyz="-0.58500000 -0.22800000 -0.29580000" rpy="0 0 0"/>
+    <parent link="refrigerator_part1_base"/>
+    <child link="refrigerator_part1"/>
+  </joint>
+  <link name="refrigerator_part2_base"/>
+  <link name="refrigerator_part2">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="refrigerator/part2_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="refrigerator/part2_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="3.000"/>
+      <inertia ixx="0.050" ixy="0" ixz="0" iyy="0.050" iyz="0" izz="0.050"/>
+    </inertial>
+  </link>
+  <joint name="refrigerator_part2_joint" type="revolute">
+    <origin xyz="0.58500000 0.22800000 0.29580000" rpy="0 0 0"/>
+    <parent link="refrigerator"/>
+    <child link="refrigerator_part2_base"/>
+    <axis xyz="0.52956143 0.05315254 0.84660469"/>
+    <limit lower="-0.017276" upper="2.5" effort="30" velocity="1.5"/>
+  </joint>
+  <joint name="refrigerator_part2_fix" type="fixed">
+    <origin xyz="-0.58500000 -0.22800000 -0.29580000" rpy="0 0 0"/>
+    <parent link="refrigerator_part2_base"/>
+    <child link="refrigerator_part2"/>
+  </joint>
+</robot>

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<robot name="gasstove">
+  <link name="gasstove">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="gasstove/base_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="gasstove/base_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="60.000"/>
+      <inertia ixx="0.120" ixy="0" ixz="0" iyy="0.120" iyz="0" izz="0.120"/>
+    </inertial>
+  </link>
+  <link name="gasstove_part1_base"/>
+  <link name="gasstove_part1">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="gasstove/part1_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="gasstove/part1_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.000"/>
+      <inertia ixx="0.035" ixy="0" ixz="0" iyy="0.035" iyz="0" izz="0.035"/>
+    </inertial>
+  </link>
+  <joint name="gasstove_part1_joint" type="revolute">
+    <origin xyz="0.11891700 -0.23899100 0.16348200" rpy="0 0 0"/>
+    <parent link="gasstove"/>
+    <child link="gasstove_part1_base"/>
+    <axis xyz="0.03967992 -0.98424995 0.17227168"/>
+    <limit lower="-0.021788000000000002" upper="2.5" effort="30" velocity="1.5"/>
+  </joint>
+  <joint name="gasstove_part1_fix" type="fixed">
+    <origin xyz="-0.11891700 0.23899100 -0.16348200" rpy="0 0 0"/>
+    <parent link="gasstove_part1_base"/>
+    <child link="gasstove_part1"/>
+  </joint>
+  <link name="gasstove_part2_base"/>
+  <link name="gasstove_part2">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="gasstove/part2_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="gasstove/part2_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.000"/>
+      <inertia ixx="0.035" ixy="0" ixz="0" iyy="0.035" iyz="0" izz="0.035"/>
+    </inertial>
+  </link>
+  <joint name="gasstove_part2_joint" type="revolute">
+    <origin xyz="-0.14208400 -0.27698600 0.02242940" rpy="0 0 0"/>
+    <parent link="gasstove"/>
+    <child link="gasstove_part2_base"/>
+    <axis xyz="0.04274325 -0.98370343 0.17464412"/>
+    <limit lower="-0.10264" upper="2.5" effort="30" velocity="1.5"/>
+  </joint>
+  <joint name="gasstove_part2_fix" type="fixed">
+    <origin xyz="0.14208400 0.27698600 -0.02242940" rpy="0 0 0"/>
+    <parent link="gasstove_part2_base"/>
+    <child link="gasstove_part2"/>
+  </joint>
+</robot>

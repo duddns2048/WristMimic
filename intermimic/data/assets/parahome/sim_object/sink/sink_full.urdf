@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<robot name="sink">
+  <link name="sink">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="sink/base_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="sink/base_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="50.000"/>
+      <inertia ixx="0.140" ixy="0" ixz="0" iyy="0.140" iyz="0" izz="0.140"/>
+    </inertial>
+  </link>
+  <link name="sink_part1_base"/>
+  <link name="sink_part1">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="sink/part1_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="sink/part1_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.500"/>
+      <inertia ixx="0.040" ixy="0" ixz="0" iyy="0.040" iyz="0" izz="0.040"/>
+    </inertial>
+  </link>
+  <joint name="sink_part1_joint" type="revolute">
+    <origin xyz="0.03930800 -0.48064500 -0.37197200" rpy="0 0 0"/>
+    <parent link="sink"/>
+    <child link="sink_part1_base"/>
+    <axis xyz="0.79087150 -0.15935230 -0.59087149"/>
+    <limit lower="-2.5" upper="0.012685" effort="30" velocity="1.5"/>
+  </joint>
+  <joint name="sink_part1_fix" type="fixed">
+    <origin xyz="-0.03930800 0.48064500 0.37197200" rpy="0 0 0"/>
+    <parent link="sink_part1_base"/>
+    <child link="sink_part1"/>
+  </joint>
+  <link name="sink_part2_base"/>
+  <link name="sink_part2">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="sink/part2_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="sink/part2_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.500"/>
+      <inertia ixx="0.040" ixy="0" ixz="0" iyy="0.040" iyz="0" izz="0.040"/>
+    </inertial>
+  </link>
+  <joint name="sink_part2_joint" type="revolute">
+    <origin xyz="0.12980000 0.38780000 -0.46037500" rpy="0 0 0"/>
+    <parent link="sink"/>
+    <child link="sink_part2_base"/>
+    <axis xyz="0.79426663 -0.16021758 -0.58606387"/>
+    <limit lower="0.0014470000000000004" upper="2.5" effort="30" velocity="1.5"/>
+  </joint>
+  <joint name="sink_part2_fix" type="fixed">
+    <origin xyz="-0.12980000 -0.38780000 0.46037500" rpy="0 0 0"/>
+    <parent link="sink_part2_base"/>
+    <child link="sink_part2"/>
+  </joint>
+</robot>

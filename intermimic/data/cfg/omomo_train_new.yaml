@@ -1,0 +1,200 @@
+# if given, will override the device setting in gym. 
+env: 
+  numEnvs: 4096
+  envSpacing: 2
+  episodeLength: 300
+  isFlagrun: False
+  enableDebugVis: False
+  playdataset: False
+  projtype: "None"
+  saveImages: False
+  initVel: False
+  moreRigid: False
+  pdControl: True
+  powerScale: 1.0
+  reset_pd_action_offset: False
+  controlFrequencyInv: 2 # 30 Hz
+  # stateInit: "Hybrid"
+  stateInit: "Start"
+  rolloutLength: 300
+  hybridInitProb: 0.1
+  dataFPS: 30
+  dataFramesScale: 1 # 25->30fps
+  dataSub: ['']
+  ballSize: 1.
+  numObs: 3198  # Will be auto-set based on useNewObsFormat
+  numObsOld: 3198  # Old format: 2 reference frames (t=1, t=16) with duplicated proprioception
+  # numObsNew: 3492  # New format: 4 reference frames (t=1, 4, 8, 16) with proprioception computed once
+  numObsNew: 2236
+  useNewObsFormat: true  # If true, use numObsNew. If false, use numObsOld
+  numWeightingObs: 30  # Size of weighting network observation
+  motion_file: InterAct/ParaHome_s10
+  robotType: "sim_human/s10sfd.xml"
+  objectDensity: 200
+  localRootObs: False
+  keyBodies: ["L_Hip", "L_Knee", "L_Ankle", "L_Toe", "R_Hip", "R_Knee", "R_Ankle", "R_Toe", "Torso", "Spine", "Chest", "Neck", "Head", "L_Thorax", "L_Shoulder", "L_Elbow", "L_Wrist", "R_Thorax", "R_Shoulder", "R_Elbow", "R_Wrist"]
+  contactBodies: ["L_Hip", "L_Knee", "L_Ankle", "L_Toe", "R_Hip", "R_Knee", "R_Ankle", "R_Toe", "Torso", "Spine", "Chest", "Neck", "Head", "L_Thorax", "L_Shoulder", "L_Elbow", "L_Wrist", "R_Thorax", "R_Shoulder", "R_Elbow", "R_Wrist", "L_Index3", "L_Middle3", "L_Pinky3", "L_Ring3","L_Thumb3","R_Index3", "R_Middle3", "R_Pinky3", "R_Ring3","R_Thumb3"] #["right_foot", "left_foot"]
+  handBodies: ["L_Wrist", "L_Index1", "L_Index2", "L_Index3", "L_Middle1", "L_Middle2", "L_Middle3", "L_Pinky1", "L_Pinky2", "L_Pinky3", "L_Ring1", "L_Ring2", "L_Ring3", "L_Thumb1", "L_Thumb2", "L_Thumb3", "R_Wrist", "R_Index1", "R_Index2", "R_Index3", "R_Middle1", "R_Middle2", "R_Middle3", "R_Pinky1", "R_Pinky2", "R_Pinky3", "R_Ring1", "R_Ring2", "R_Ring3", "R_Thumb1", "R_Thumb2", "R_Thumb3"]
+  WristBodies: ["L_Wrist", "R_Wrist"]
+  ShoulderElbowBodies: ["L_Shoulder", "L_Elbow", "R_Shoulder", "R_Elbow"]
+  # Base list without ANY arm parts (neither left nor right Wrist/Elbow/Shoulder)
+  # Used as base for dynamic contact-based body exclusion
+  KeyBodies_No_Elbow_No_Wrist_No_Shoulder: ["L_Hip", "L_Knee", "L_Ankle", "L_Toe", "R_Hip", "R_Knee", "R_Ankle", "R_Toe", "Torso", "Spine", "Chest", "Neck", "Head", "L_Thorax", "R_Thorax"]
+  KeyBodies_No_Elbow_No_Shoulder: ["L_Hip", "L_Knee", "L_Ankle", "L_Toe", "R_Hip", "R_Knee", "R_Ankle", "R_Toe", "Torso", "Spine", "Chest", "Neck", "Head", "L_Thorax", "R_Thorax", "L_Wrist", "R_Wrist"]
+  # Base list without ANY arm parts (neither left nor right Wrist/Elbow/Shoulder)
+  # Used as base for dynamic contact-based exclusion
+  WholeBodies_No_Elbow_No_Hand_No_Shoulder: ["Pelvis", "L_Hip", "L_Knee", "L_Ankle", "L_Toe", "R_Hip", "R_Knee", "R_Ankle", "R_Toe", "Torso", "Spine", "Chest", "Neck", "Head", "L_Thorax", "R_Thorax"]  
+  FingerBodies: ["L_Index1", "L_Index2", "L_Index3", "L_Middle1", "L_Middle2", "L_Middle3", "L_Pinky1", "L_Pinky2", "L_Pinky3", "L_Ring1", "L_Ring2", "L_Ring3", "L_Thumb1", "L_Thumb2", "L_Thumb3", "R_Index1", "R_Index2", "R_Index3", "R_Middle1", "R_Middle2", "R_Middle3", "R_Pinky1", "R_Pinky2", "R_Pinky3", "R_Ring1", "R_Ring2", "R_Ring3", "R_Thumb1", "R_Thumb2", "R_Thumb3"]
+  terminationHeight: 0.15
+  enableEarlyTermination: True
+  physicalBufferSize: 3
+  humanObjectCollision: [0,1,2]
+
+  # ============================================================================
+  # GRASP/RESET CONFIGURATION - START
+  # All timing, thresholds, and weights for grasp and reset behaviors
+  # ============================================================================
+
+  # Grasp window parameters (frames relative to contact)
+  graspWindowBefore: 10  # x: frames before contact
+  graspWindowAfter: 15   # y: frames after contact
+
+  # Finger window parameters (frames relative to contact)
+  fingerWindowBefore: 5   # Finger reward starts 5 frames before contact
+  fingerWindowAfter: 15   # Finger reward ends 15 frames after contact
+
+  # Reset window parameters (frames relative to contact)
+  resetWindowBefore: 5    # Reset window starts 5 frames before contact
+  resetWindowAfter: 15    # Reset window ends 15 frames after contact
+
+  # Reset and reward transition frames (relative to contact frame) - 3 stages
+  # NOTE: These transitions are SHARED across all windows (grasp, finger, reset)
+  resetTransitionFrame1: -2   # Frame where stage 1 ends and stage 2 begins (key part starts)
+  resetTransitionFrame2: 12  # Frame where stage 2 ends and stage 3 begins (key part ends)
+
+  # Wrist reset thresholds (3 stages)
+  # Stage 1: contact-resetWindowBefore to contact+resetTransitionFrame1 (moderate thresholds)
+  wristPosResetThreshold1: 0.15  # Position threshold stage 1 (meters)
+  wristRotResetThreshold1: 0.5   # Rotation threshold stage 1 (radians)
+  # Stage 2: contact+resetTransitionFrame1 to contact+resetTransitionFrame2 (STRICTEST - "key part")
+  wristPosResetThreshold2: 0.07  # Position threshold stage 2 (meters) - STRICTEST
+  wristRotResetThreshold2: 0.2   # Rotation threshold stage 2 (radians) - STRICTEST
+  # Stage 3: contact+resetTransitionFrame2 to contact+resetWindowAfter (moderate thresholds)
+  wristPosResetThreshold3: 0.15  # Position threshold stage 3 (meters)
+  wristRotResetThreshold3: 0.5   # Rotation threshold stage 3 (radians)
+
+  # ============================================================================
+  # GRASP/RESET CONFIGURATION - END
+  # ============================================================================
+
+  # VAE latent action settings
+  z_type: "mlp"
+  embedding_size: 153  # Latent action dimension
+  embedding_norm: 1
+
+  # ================== Omnigrasp parameters ==================
+  fixed_latent: True
+  res_hand: False
+  camera_config:
+    width: 32
+    height: 32
+    fov: 60
+  kp_scale: 1
+  self_obs_v: 1
+  obs_v: 1
+
+  save_kin_info: False
+
+
+  asset:
+    assetRoot: "intermimic/data/assets/smplx"
+
+
+  plane:
+    staticFriction: 0.9
+    dynamicFriction: 0.9
+    restitution: 0.7
+  
+  rewardWeights:
+    p: 30.
+    r: 2.5
+    pv: 0.
+    rv: 0.
+
+    op: 5.0
+    or: 0.1
+    # opv: 0.1
+    opv: 0.
+    orv: 0.
+
+    ig: 5.
+
+    cg_hand: 10.
+    cg_other: 5.
+    cg_all: 3.
+
+    # gp: 5.
+    # gho: 5.
+    # gsn: 5.
+    # gp: 10.
+    # gho: 10.
+    # gsn: 2.
+
+    # For new grasping reward
+    gbp: 10.
+    gbr: 1.
+
+    # ========================================================================
+    # STAGE-WISE REWARD WEIGHTS - START
+    # Rewards use 3-stage system with transitions at resetTransitionFrame1/2
+    # ========================================================================
+
+    # Stage-wise wrist reward weights (3 stages)
+    # Stage 1: contact-15 to contact+2 (moderate weights)
+    gwp1: 70.  # Wrist position weight stage 1
+    gwr1: 4.5   # Wrist rotation weight stage 1
+    # Stage 2: contact+2 to contact+10 (HIGHEST weights - "key part")
+    gwp2: 70.  # Wrist position weight stage 2 - HIGHEST
+    gwr2: 4.5   # Wrist rotation weight stage 2 - HIGHEST
+    # Stage 3: contact+10 to contact+15 (moderate weights)
+    gwp3: 70.  # Wrist position weight stage 3
+    gwr3: 4.5   # Wrist rotation weight stage 3
+
+    # Stage-wise finger reward weights (3 stages)
+    # Stage 1: contact-5 to contact+2 (moderate weights)
+    gfp1: 5.  # Finger position weight stage 1
+    gfr1: 1.   # Finger rotation weight stage 1
+    # Stage 2: contact+2 to contact+10 (HIGHEST weights - "key part")
+    gfp2: 0  # Finger position weight stage 2 - HIGHEST
+    gfr2: 0.   # Finger rotation weight stage 2 - HIGHEST
+    # Stage 3: contact+10 to contact+15 (moderate weights)
+    gfp3: 0.  # Finger position weight stage 3
+    gfr3: 0.   # Finger rotation weight stage 3
+
+    # ========================================================================
+    # STAGE-WISE REWARD WEIGHTS - END
+    # ========================================================================
+
+
+    eg1: 0.00002
+    eg2: 0.00002
+    eg3: 0.000000001
+
+sim:
+  substeps: 2
+  physx:
+    num_threads: 4
+    solver_type: 1  # 0: pgs, 1: tgs
+    num_position_iterations: 20
+    num_velocity_iterations: 0
+    contact_offset: 0.002
+    rest_offset: 0.0
+    bounce_threshold_velocity: 0.2
+    max_depenetration_velocity: 10.0
+    default_buffer_size_multiplier: 20.0
+    max_gpu_contact_pairs: 34603008 # 8*1024*1024
+
+  flex:
+    num_inner_iterations: 10
+    warm_start: 0.25
+

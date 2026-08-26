@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot name="gasstove">
+  <link name="gasstove">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="gasstove/base_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="gasstove/base_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="60.000"/>
+      <inertia ixx="0.120" ixy="0" ixz="0" iyy="0.120" iyz="0" izz="0.120"/>
+    </inertial>
+  </link>
+</robot>
