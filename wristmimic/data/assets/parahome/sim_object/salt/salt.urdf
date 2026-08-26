@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot name="salt">
+  <link name="salt">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="salt/base_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="salt/base_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.000"/>
+      <inertia ixx="0.020" ixy="0" ixz="0" iyy="0.020" iyz="0" izz="0.020"/>
+    </inertial>
+  </link>
+</robot>

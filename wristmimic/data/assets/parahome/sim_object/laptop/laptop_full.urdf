@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<robot name="laptop">
+  <link name="laptop">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="laptop/base_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="laptop/base_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.750"/>
+      <inertia ixx="0.0035" ixy="0" ixz="0" iyy="0.0035" iyz="0" izz="0.0035"/>
+    </inertial>
+  </link>
+  <link name="laptop_part1_base"/>
+  <link name="laptop_part1">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="laptop/part1_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="laptop/part1_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.750"/>
+      <inertia ixx="0.0015" ixy="0" ixz="0" iyy="0.0015" iyz="0" izz="0.0015"/>
+    </inertial>
+  </link>
+  <joint name="laptop_part1_joint" type="revolute">
+    <origin xyz="1.68367994 -1.23288572 -2.81500983" rpy="0 0 0"/>
+    <parent link="laptop"/>
+    <child link="laptop_part1_base"/>
+    <axis xyz="-0.47362767 0.37981738 0.79461663"/>
+    <limit lower="-3.14" upper="3.14" effort="50" velocity="3"/>
+  </joint>
+  <joint name="laptop_part1_fix" type="fixed">
+    <origin xyz="-1.68367994 1.23288572 2.81500983" rpy="0 0 0"/>
+    <parent link="laptop_part1_base"/>
+    <child link="laptop_part1"/>
+  </joint>
+</robot>
+

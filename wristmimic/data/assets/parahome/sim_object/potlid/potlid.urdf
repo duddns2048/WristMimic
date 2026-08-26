@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot name="potlid">
+  <link name="potlid">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="potlid/base_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="potlid/base_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.500"/>
+      <inertia ixx="0.025" ixy="0" ixz="0" iyy="0.025" iyz="0" izz="0.025"/>
+    </inertial>
+  </link>
+</robot>
