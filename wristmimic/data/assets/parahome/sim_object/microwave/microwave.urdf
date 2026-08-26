@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<robot name="microwave">
+  <link name="microwave">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="microwave/base_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="microwave/base_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10.000"/>
+      <inertia ixx="0.140" ixy="0" ixz="0" iyy="0.140" iyz="0" izz="0.140"/>
+    </inertial>
+  </link>
+  <link name="microwave_part1_base"/>
+  <link name="microwave_part1">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="microwave/part1_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="microwave/part1_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4.500"/>
+      <inertia ixx="0.060" ixy="0" ixz="0" iyy="0.060" iyz="0" izz="0.060"/>
+    </inertial>
+  </link>
+  <joint name="microwave_part1_joint" type="revolute">
+    <origin xyz="0.06971579 -0.28571332 -0.02202025" rpy="0 0 0"/>
+    <parent link="microwave"/>
+    <child link="microwave_part1_base"/>
+    <axis xyz="-0.75912021 0.20176305 0.61889270"/>
+    <limit lower="-0.017757000000000002" upper="2.5" effort="30" velocity="1.5"/>
+  </joint>
+  <joint name="microwave_part1_fix" type="fixed">
+    <origin xyz="-0.06971579 0.28571332 0.02202025" rpy="0 0 0"/>
+    <parent link="microwave_part1_base"/>
+    <child link="microwave_part1"/>
+  </joint>
+</robot>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<robot name="trashbin">
+  <link name="trashbin">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="trashbin/base_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="trashbin/base_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="3.000"/>
+      <inertia ixx="0.080" ixy="0" ixz="0" iyy="0.080" iyz="0" izz="0.080"/>
+    </inertial>
+  </link>
+  <link name="trashbin_part1_base"/>
+  <link name="trashbin_part1">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="trashbin/part1_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="trashbin/part1_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.000"/>
+      <inertia ixx="0.020" ixy="0" ixz="0" iyy="0.020" iyz="0" izz="0.020"/>
+    </inertial>
+  </link>
+  <joint name="trashbin_part1_joint" type="revolute">
+    <origin xyz="-0.04560000 -0.04586100 -0.07058300" rpy="0 0 0"/>
+    <parent link="trashbin"/>
+    <child link="trashbin_part1_base"/>
+    <axis xyz="0.47725969 -0.29430637 -0.82801386"/>
+    <limit lower="0.022425" upper="2.09" effort="30" velocity="1.5"/>
+  </joint>
+  <joint name="trashbin_part1_fix" type="fixed">
+    <origin xyz="0.04560000 0.04586100 0.07058300" rpy="0 0 0"/>
+    <parent link="trashbin_part1_base"/>
+    <child link="trashbin_part1"/>
+  </joint>
+</robot>

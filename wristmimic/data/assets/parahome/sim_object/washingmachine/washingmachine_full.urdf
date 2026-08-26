@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<robot name="washingmachine">
+  <link name="washingmachine">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="washingmachine/base_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="washingmachine/base_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="50.000"/>
+      <inertia ixx="0.120" ixy="0" ixz="0" iyy="0.120" iyz="0" izz="0.120"/>
+    </inertial>
+  </link>
+  <link name="washingmachine_part1_base"/>
+  <link name="washingmachine_part1">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="washingmachine/part1_visual.obj"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="washingmachine/part1_collision.obj"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.000"/>
+      <inertia ixx="0.035" ixy="0" ixz="0" iyy="0.035" iyz="0" izz="0.035"/>
+    </inertial>
+  </link>
+  <joint name="washingmachine_part1_joint" type="revolute">
+    <origin xyz="-0.17421496 -0.20119654 -0.24751949" rpy="0 0 0"/>
+    <parent link="washingmachine"/>
+    <child link="washingmachine_part1_base"/>
+    <axis xyz="-0.78053150 -0.06498485 0.62172948"/>
+    <limit lower="-0.061179000000000004" upper="2.5" effort="30" velocity="1.5"/>
+  </joint>
+  <joint name="washingmachine_part1_fix" type="fixed">
+    <origin xyz="0.17421496 0.20119654 0.24751949" rpy="0 0 0"/>
+    <parent link="washingmachine_part1_base"/>
+    <child link="washingmachine_part1"/>
+  </joint>
+</robot>
